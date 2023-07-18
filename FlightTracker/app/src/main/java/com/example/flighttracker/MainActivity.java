@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,14 +32,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createToast(this,"Welcome to Flight Tracking");
         flight_list = findViewById(R.id.rv_fights);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         flights = getFlights();
         airport_code_input = findViewById(R.id.edit_search);
+        SharedPreferenceHelper.initialize(MainActivity.this,"flight_tracker_preference");
+        String earlier_SearchTerm = SharedPreferenceHelper.getStringValue("SEARCH_TERM");
+        if(earlier_SearchTerm!="")
+        {
+            airport_code_input.setText(earlier_SearchTerm);
+        }
+
         search =findViewById(R.id.btn_search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(TextUtils.isEmpty(airport_code_input.getText().toString()))
+                {
+                    showAlertDialog(MainActivity.this,"Airport code is required","Please enter Airport code",new String[]{"Ok","Cancel"});
+                }
+                else
+                {
+                    snackBar(MainActivity.this,"Enter Value is"+airport_code_input.getText().toString(),airport_code_input);
+
+                    SharedPreferenceHelper.setStringValue("SEARCH_TERM",airport_code_input.getText().toString());
+                }
 
             }
         });

@@ -52,6 +52,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
             departure_airport.setText(flight.getDeparture_airport());
             arrival_airport.setText(flight.getArrival_airport());
             flight_status.setText(flight.getStatus());
+
         }
 
     }
