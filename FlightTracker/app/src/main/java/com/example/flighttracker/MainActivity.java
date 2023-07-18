@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView flight_list;
     List<Flight> flights;
+    Button search;
+    EditText airport_code_input;
 
 
     @Override
@@ -30,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
         flight_list = findViewById(R.id.rv_fights);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         flights = getFlights();
+        airport_code_input = findViewById(R.id.edit_search);
+        search =findViewById(R.id.btn_search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         flight_list.setLayoutManager(linearLayoutManager);
         FlightAdapter flightAdapter = new FlightAdapter(flights);
         flight_list.setAdapter(flightAdapter);

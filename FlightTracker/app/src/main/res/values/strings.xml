@@ -3,4 +3,6 @@
     <string name="departure_airport">Departure Airport:</string>
     <string name="arrival_airport">Arrival Airport:</string>
     <string name="flight_status">Flight Status:</string>
+    <string name="search">Search</string>
+    <string name="hint_airport_code">Enter airport Code</string>
 </resources>
