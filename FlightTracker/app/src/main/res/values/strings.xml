@@ -5,4 +5,8 @@
     <string name="flight_status">Flight Status:</string>
     <string name="search">Search</string>
     <string name="hint_airport_code">Enter airport Code</string>
+    <string name="flight_tracker">Flight Tracker</string>
+    <string name="currency_convertor">Currency Converter</string>
+    <string name="trivia_question">Trivia Question</string>
+    <string name="bear_image">Bear Image</string>
 </resources>
