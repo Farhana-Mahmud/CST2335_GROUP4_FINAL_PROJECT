@@ -25,10 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    RecyclerView flight_list;
+
     List<Flight> flights;
-    Button search;
-    EditText airport_code_input;
     ActivityMainBinding activityMainBinding;
 
 
@@ -58,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    snackBar(MainActivity.this,"Enter Value is"+airport_code_input.getText().toString(),airport_code_input);
+                    snackBar(MainActivity.this,"Enter Value is"+activityMainBinding.editSearch.getText().toString(),activityMainBinding.editSearch);
 
-                    SharedPreferenceHelper.setStringValue("SEARCH_TERM",airport_code_input.getText().toString());
+                    SharedPreferenceHelper.setStringValue("SEARCH_TERM",activityMainBinding.editSearch.getText().toString());
                 }
 
             }
