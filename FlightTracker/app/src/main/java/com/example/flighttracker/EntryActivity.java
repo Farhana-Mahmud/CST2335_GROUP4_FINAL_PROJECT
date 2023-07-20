@@ -28,4 +28,6 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
+
 }

@@ -9,4 +9,11 @@
     <string name="currency_convertor">Currency Converter</string>
     <string name="trivia_question">Trivia Question</string>
     <string name="bear_image">Bear Image</string>
+    <string name="help">Help</string>
+    <string name="favourite">Favourite</string>
+    <string name="home">Home</string>
+    <string name="main_help_title">Search Airport by It\'s code Name</string>
+    <string name="main_help_message">Instruction to use</string>
+    <string name="main_positive_button_label">Ok</string>
+    <string name="main_negative_button_label">Cancel\n</string>
 </resources>

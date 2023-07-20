@@ -1,5 +1,6 @@
 package com.example.flighttracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -10,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +70,28 @@ public class MainActivity extends AppCompatActivity {
         FlightAdapter flightAdapter = new FlightAdapter(flights);
         activityMainBinding.rvFights.setAdapter(flightAdapter);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.menu_help)
+        {
+            showAlertDialog(this,getResources().getString(R.string.main_help_title),getResources().getString(R.string.main_help_message),
+                    new String[]{getResources().getString(R.string.main_positive_button_label),
+                            getResources().getString(R.string.main_negative_button_label)});
+        }
+        else if(item.getItemId()==R.id.menu_favourite)
+        {
+
+        }
+        return true;
     }
 
     List<Flight> getFlights() {
