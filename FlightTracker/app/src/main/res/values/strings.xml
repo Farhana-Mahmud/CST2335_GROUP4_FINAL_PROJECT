@@ -5,6 +5,7 @@
     <string name="flight_status">Flight Status:</string>
     <string name="search">Search</string>
     <string name="hint_airport_code">Enter airport Code</string>
+    <string name="missing">Missing</string>
     <string name="flight_tracker">Flight Tracker</string>
     <string name="currency_convertor">Currency Converter</string>
     <string name="trivia_question">Trivia Question</string>
@@ -20,5 +21,7 @@
     <string name="airport_code_warning">Please enter Airport code</string>
     <string name="no_internet">No internet connection. Please check your network settings.</string>
     <string name="ok">Ok</string>
+    <string name="no_data_found">No flights found for the given airport code.</string>
+    <string name="api_error">Error occurred while fetching data</string>
     <string name="cancel">Cancel</string>
 </resources>
