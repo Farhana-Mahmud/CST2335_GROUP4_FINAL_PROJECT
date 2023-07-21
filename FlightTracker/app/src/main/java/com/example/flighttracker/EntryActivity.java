@@ -23,9 +23,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(EntryActivity.this,MainActivity.class);
+        Intent intent = new Intent(EntryActivity.this, MainActivity.class);
         startActivity(intent);
 
 
     }
+
+
 }

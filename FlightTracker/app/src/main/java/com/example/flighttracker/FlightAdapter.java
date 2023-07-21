@@ -41,7 +41,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         return data.size();
     }
 
-   static class FlightViewHolder extends  RecyclerView.ViewHolder
+    public void setData(List<Flight> flights) {
+        this.data.clear();
+        this.data=flights;
+        notifyDataSetChanged();
+    }
+
+    static class FlightViewHolder extends  RecyclerView.ViewHolder
     {
         FlightListItemBinding flightListItemBinding;
         public FlightViewHolder(@NonNull FlightListItemBinding flightListItemBinding) {
@@ -51,9 +57,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         }
         void onBind(Flight flight)
         {
-            flightListItemBinding.txtFlightAirportValue.setText(flight.getDeparture_airport());
-            flightListItemBinding.txtApprivalAirportValue.setText(flight.getArrival_airport());
-            flightListItemBinding.txtFlightStatusValue.setText(flight.getStatus());
+
+            flightListItemBinding.txtFlightNoValue.setText(flight.getmFlightNumber());
+
 
         }
 
