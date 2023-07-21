@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Flight Tracker</string>
-    <string name="departure_airport">Departure Airport:</string>
+    <string name="flight_no">Flight No:</string>
     <string name="arrival_airport">Arrival Airport:</string>
     <string name="flight_status">Flight Status:</string>
     <string name="search">Search</string>
@@ -16,4 +16,9 @@
     <string name="main_help_message">Instruction to use</string>
     <string name="main_positive_button_label">Ok</string>
     <string name="main_negative_button_label">Cancel\n</string>
+    <string name="hint_airport_code_input">Airport code is require</string>
+    <string name="airport_code_warning">Please enter Airport code</string>
+    <string name="no_internet">No internet connection. Please check your network settings.</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>
