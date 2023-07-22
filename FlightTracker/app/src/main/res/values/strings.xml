@@ -24,4 +24,10 @@
     <string name="no_data_found">No flights found for the given airport code.</string>
     <string name="api_error">Error occurred while fetching data</string>
     <string name="cancel">Cancel</string>
+    <string name="terimal">Terminal:</string>
+    <string name="gate">Gate:</string>
+    <string name="delay">Delay:</string>
+    <string name="departure_airport">Departure Airport</string>
+    <string name="save_to_favourite">Save to favourite</string>
+    <string name="add_into_favourite" >Add into favourite successfully</string>
 </resources>

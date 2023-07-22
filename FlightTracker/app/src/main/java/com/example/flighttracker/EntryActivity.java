@@ -23,8 +23,17 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(EntryActivity.this, MainActivity.class);
-        startActivity(intent);
+        if(view.getId()==R.id.btn_flight_tracker)
+        {
+            Intent intent = new Intent(EntryActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if(view.getId()==R.id.btn_currency_converter)
+        {
+            Intent intent = new Intent(EntryActivity.this, FlightDetail.class);
+            startActivity(intent);
+        }
+
 
 
     }

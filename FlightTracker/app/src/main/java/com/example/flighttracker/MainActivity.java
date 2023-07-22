@@ -2,6 +2,7 @@ package com.example.flighttracker;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
     private FlightAdapter flightAdapter;
     private ActivityMainBinding activityMainBinding;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.rvFights.setLayoutManager(linearLayoutManager);
         activityMainBinding.pbLoader.setVisibility(View.GONE);
         flightAdapter = new FlightAdapter(new ArrayList<>());
+        flightAdapter.setOnItemClickListener(this::onItemClickListener);
         activityMainBinding.rvFights.setAdapter(flightAdapter);
 
         // Initialize the RequestQueue (Consider using a singleton for RequestQueue)
@@ -119,15 +121,15 @@ public class MainActivity extends AppCompatActivity {
         return flights;
     }
 
-    void createToast(Context context, String message) {
+   public static void createToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    void snackBar(Context context, String message, View view) {
+  public   static void snackBar(Context context, String message, View view) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
-    void showAlertDialog(Context context, String title, String message, String[] buttonTitles) {
+   public void showAlertDialog(Context context, String title, String message, String[] buttonTitles) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(title).setMessage(message).setPositiveButton(buttonTitles[0], new DialogInterface.OnClickListener() {
                     @Override
@@ -142,5 +144,14 @@ public class MainActivity extends AppCompatActivity {
                 });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onItemClickListener(Flight flight, int position) {
+
+        Intent intent = new Intent(this,FlightDetail.class);
+        intent.putExtra(API_KEYS.FLIGHT_DETAIL,flight);
+        startActivity(intent);
+
     }
 }

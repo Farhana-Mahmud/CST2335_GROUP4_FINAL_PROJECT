@@ -2,6 +2,9 @@ package com.example.flighttracker;
 
 public class API_KEYS {
     public static final String DATA = "data";
+    public static final String DATABASE_NAME="flight_database";
+    public static final String TABLE_NAME="flight_table";
+    public static final String FLIGHT_DETAIL = "FLIGHT_DETAIL" ;
     public static String FLIGHT_DATE="flight_date";
     public static String FLIGHT_STATUS= "flight_status";
     public static String DEPARTURE ="departure";
