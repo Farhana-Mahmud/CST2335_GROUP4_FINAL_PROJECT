@@ -48,6 +48,11 @@ public class FlightDetail extends Fragment implements View.OnClickListener {
         flightDatabase = Room.databaseBuilder(getContext(),FlightDatabase.class,API_KEYS.DATABASE_NAME).build();
         flightDao = flightDatabase.flightDao();
         flight = getArguments().getParcelable(API_KEYS.FLIGHT_DETAIL);
+        int saveIsVisible = getArguments().getInt(API_KEYS.FRAGMENT_FAVOURITE,0);
+        if(saveIsVisible==1)
+        {
+            flightDetailBinding.btnAdd.setVisibility(View.GONE);
+        }
         setHasOptionsMenu(true);
         if(flight!=null)
         {

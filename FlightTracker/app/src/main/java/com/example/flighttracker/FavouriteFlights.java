@@ -110,6 +110,7 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
 
         Fragment fragment = new FlightDetail();
         Bundle bundle = new Bundle();
+        bundle.putInt(API_KEYS.FRAGMENT_FAVOURITE,1);
         bundle.putParcelable(API_KEYS.FLIGHT_DETAIL,flight);
         fragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(API_KEYS.FLIGHT_DETAIL).commit();
