@@ -2,6 +2,16 @@ package com.example.flighttracker;
 
 public class API_KEYS {
     public static final String DATA = "data";
+    public static final String DATABASE_NAME="flight_database";
+    public static final String TABLE_NAME="flight_table";
+    public static final String FRAGMENT_MAIN="main";
+    public static final String FRAGMENT_DETAIL="detail";
+    public  static final String FRAGMENT_FAVOURITE="favourite";
+    public static final String FLIGHT_DETAIL = "FLIGHT_DETAIL" ;
+    public  static final String API_KEY="d7e003f1749050593c9f24275b2073a8";
+    public static final String API_URL= "http://api.aviationstack.com/v1/flights?access_key=" + API_KEY + "&dep_iata=";
+    public static final String PREFERENCE_NAME = "flight_tracker_preference";
+    public static final String AIRPORT_CODE = "AIRPORT_CODE";
     public static String FLIGHT_DATE="flight_date";
     public static String FLIGHT_STATUS= "flight_status";
     public static String DEPARTURE ="departure";

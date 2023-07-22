@@ -10,18 +10,28 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flighttracker.databinding.FlightListItemBinding;
+import com.example.flighttracker.generated.callback.OnClickListener;
 
 import java.util.List;
 
 public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightViewHolder> {
 
     private List<Flight> data;
+    private OnItemClickListener onItemClickListener;
+    private OnLongClickListener onLongClickListener;
 
     public FlightAdapter(List<Flight>data)
     {
         this.data = data;
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+    }
 
     @NonNull
     @Override
@@ -33,6 +43,25 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     @Override
     public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
         Flight flight = data.get(position);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(onLongClickListener!=null)
+                {
+                    onLongClickListener.onLongClickListener(flight,position);
+                }
+                return true;
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemClickListener!=null)
+                {
+                    onItemClickListener.onItemClickListener(flight,position);
+                }
+            }
+        });
         holder.onBind(flight);
     }
 
