@@ -1,12 +1,21 @@
 package com.example.flighttracker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.flighttracker.database.FlightDao;
 import com.example.flighttracker.database.FlightDatabase;
@@ -15,28 +24,42 @@ import com.example.flighttracker.databinding.ActivityFlightDetailBinding;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FlightDetail extends AppCompatActivity implements View.OnClickListener {
+public class FlightDetail extends Fragment implements View.OnClickListener {
 
 
-    FlightViewModel flightViewModel;
     ActivityFlightDetailBinding flightDetailBinding;
     FlightDatabase flightDatabase;
     FlightDao flightDao;
     Flight flight;
 
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        flightDetailBinding = DataBindingUtil.setContentView(this,R.layout.activity_flight_detail);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        flightDetailBinding = ActivityFlightDetailBinding.inflate(inflater,container,false);
+        return flightDetailBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         flightDetailBinding.setOnClick(this::onClick);
-        flightViewModel = new ViewModelProvider(this).get(FlightViewModel.class);
-        flightDatabase = Room.databaseBuilder(this,FlightDatabase.class,API_KEYS.DATABASE_NAME).build();
+        flightDatabase = Room.databaseBuilder(getContext(),FlightDatabase.class,API_KEYS.DATABASE_NAME).build();
         flightDao = flightDatabase.flightDao();
-        flight = getIntent().getExtras().getParcelable(API_KEYS.FLIGHT_DETAIL);
+        flight = getArguments().getParcelable(API_KEYS.FLIGHT_DETAIL);
+        setHasOptionsMenu(true);
         if(flight!=null)
         {
             fillFlightDetail(flight);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.help_menu_detail,menu);
+
     }
 
     void fillFlightDetail(Flight flight)
@@ -58,9 +81,21 @@ public class FlightDetail extends AppCompatActivity implements View.OnClickListe
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(()->{
                 flightDao.insert(flight);
-                runOnUiThread(()->MainActivity.snackBar(FlightDetail.this,getResources().getString(R.string.add_into_favourite),flightDetailBinding.getRoot()));// Adds to database
+                getActivity().runOnUiThread(()->MainActivity.snackBar(getContext(),getResources().getString(R.string.add_into_favourite),flightDetailBinding.getRoot()));// Adds to database
             });
         }
 
     }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.menu_help)
+        {
+            MainActivity.showAlertDialog(getContext(),getResources().getString(R.string.detail_help_title),getResources().getString(R.string.detail_help_message),
+                    new String[]{getResources().getString(R.string.main_positive_button_label),
+                            getResources().getString(R.string.main_negative_button_label)},null,null);
+        }
+
+        return true;
+    }
+
 }

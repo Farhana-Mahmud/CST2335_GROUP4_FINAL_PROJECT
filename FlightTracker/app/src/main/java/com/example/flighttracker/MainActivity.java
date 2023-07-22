@@ -35,100 +35,39 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private FlightAdapter flightAdapter;
+
     private ActivityMainBinding activityMainBinding;
-    private RequestQueue requestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        activityMainBinding.rvFights.setLayoutManager(linearLayoutManager);
-        activityMainBinding.pbLoader.setVisibility(View.GONE);
-        flightAdapter = new FlightAdapter(new ArrayList<>());
-        flightAdapter.setOnItemClickListener(this::onItemClickListener);
-        activityMainBinding.rvFights.setAdapter(flightAdapter);
-
-        // Initialize the RequestQueue (Consider using a singleton for RequestQueue)
-        requestQueue = Volley.newRequestQueue(this);
-
-        activityMainBinding.btnSearch.setOnClickListener(view -> {
-            String airportCode = activityMainBinding.editSearch.getText().toString();
-            if (TextUtils.isEmpty(airportCode)) {
-                showAlertDialog(MainActivity.this, getResources().getString(R.string.hint_airport_code), getResources().getString(R.string.airport_code_warning), new String[]{getResources().getString(R.string.ok),getResources().getString(R.string.cancel)},null,null);
-            } else {
-                if (isNetworkConnected()) {
-                    activityMainBinding.pbLoader.setVisibility(View.VISIBLE);
-                    fetchDataFromAPI(airportCode);
-                } else {
-                    createToast(MainActivity.this, getResources().getString(R.string.no_internet));
-                }
-            }
-        });
+        getSupportFragmentManager().beginTransaction().add(R.id.container,new MainFragment(),API_KEYS.FRAGMENT_MAIN).addToBackStack(API_KEYS.FRAGMENT_MAIN).commit();
     }
 
-    // Check network connectivity
-    private boolean isNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-    }
-    private void fetchDataFromAPI(String airportCode) {
-        String apiKey = "d7e003f1749050593c9f24275b2073a8";
-        String apiUrl = "http://api.aviationstack.com/v1/flights?access_key=" + apiKey + "&dep_iata=" + airportCode;
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, apiUrl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        activityMainBinding.pbLoader.setVisibility(View.GONE);
-                        Log.d("API_RESPONSE", response.toString());
-                        List<Flight> flights = parseFlightData(response);
-                        if (flights.size()>0) {
-                            flightAdapter.setData(flights);
-                        } else {
-                            createToast(MainActivity.this, "No flights found for the given airport code.");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        activityMainBinding.pbLoader.setVisibility(View.GONE);
-                        // Log the error
-                        Log.e("API_ERROR", "Error occurred while fetching data: " + error.getMessage());
-                        createToast(MainActivity.this, "Error occurred while fetching data: " + error.getMessage());
-                    }
-                });
-
-        requestQueue.add(jsonObjectRequest);
-    }
-    private List<Flight> parseFlightData(JSONObject response) {
-        List<Flight> flights = new ArrayList<>();
-        try {
-            JSONArray data = response.getJSONArray(API_KEYS.DATA);
-            for (int i = 0; i < data.length(); i++) {
-                JSONObject flightObject = data.getJSONObject(i);
-                Flight flight = new Flight().convertJsonToFlight(flightObject);
-                flights.add(flight);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return flights;
-    }
 
    public static void createToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-  public   static void snackBar(Context context, String message, View view) {
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount()>0)
+        {
+            getSupportFragmentManager().popBackStack();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+
+    }
+
+    public   static void snackBar(Context context, String message, View view) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
@@ -153,35 +92,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         alertDialog.show();
     }
 
-    @Override
-    public void onItemClickListener(Flight flight, int position) {
 
-        Intent intent = new Intent(this,FlightDetail.class);
-        intent.putExtra(API_KEYS.FLIGHT_DETAIL,flight);
-        startActivity(intent);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.help_menu_main,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId()==R.id.menu_help)
-        {
-            showAlertDialog(this,getResources().getString(R.string.main_help_title),getResources().getString(R.string.main_help_message),
-                    new String[]{getResources().getString(R.string.main_positive_button_label),
-                            getResources().getString(R.string.main_negative_button_label)},null,null);
-        }
-        else if(item.getItemId()==R.id.menu_favourite)
-        {
-                Intent intent = new Intent(MainActivity.this, FavouriteFlights.class);
-                startActivity(intent);
-        }
-        return true;
-    }
 }

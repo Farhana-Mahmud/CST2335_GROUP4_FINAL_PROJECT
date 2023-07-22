@@ -1,28 +1,31 @@
 package com.example.flighttracker;
 
-import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.flighttracker.database.FlightDao;
 import com.example.flighttracker.database.FlightDatabase;
 import com.example.flighttracker.databinding.ActivityFavouritelistingBinding;
@@ -38,57 +41,86 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FavouriteFlights extends AppCompatActivity implements OnItemClickListener,OnLongClickListener,PositiveClickListener {
+public class FavouriteFlights extends Fragment implements OnItemClickListener, OnLongClickListener, PositiveClickListener {
 
     private FlightAdapter flightAdapter;
     private ActivityFavouritelistingBinding favouritelistingBinding;
 
     FlightDatabase flightDatabase;
     FlightDao flightDao;
-    List<Flight> flights;
+
+    FlightViewModel flightViewModel;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        favouritelistingBinding = DataBindingUtil.inflate(inflater, R.layout.activity_favouritelisting, container, false);
+        setHasOptionsMenu(true);
+        return favouritelistingBinding.getRoot();
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        favouritelistingBinding = DataBindingUtil.setContentView(this, R.layout.activity_favouritelisting);
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+            menu.clear();
+            inflater.inflate(R.menu.help_menu_detail,menu);
+    }
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        favouritelistingBinding = DataBindingUtil.setContentView(getActivity(), R.layout.activity_favouritelisting);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         favouritelistingBinding.rvFights.setLayoutManager(linearLayoutManager);
+        flightViewModel = new ViewModelProvider(this).get(FlightViewModel.class);
         flightAdapter = new FlightAdapter(new ArrayList<>());
         flightAdapter.setOnItemClickListener(this::onItemClickListener);
         flightAdapter.setOnLongClickListener(this::onLongClickListener);
         favouritelistingBinding.rvFights.setAdapter(flightAdapter);
-        flightDatabase = Room.databaseBuilder(FavouriteFlights.this, FlightDatabase.class, API_KEYS.DATABASE_NAME).build();
+        flightDatabase = Room.databaseBuilder(getContext(), FlightDatabase.class, API_KEYS.DATABASE_NAME).build();
         flightDao = flightDatabase.flightDao();
         Executor thread = Executors.newSingleThreadExecutor();
         thread.execute(() -> {
-            flights = flightDao.getFlights();
-            if (flights.size() == 0) {
-                runOnUiThread(() -> {
-                    MainActivity.createToast(FavouriteFlights.this, getResources().getString(R.string.no_record_found));
-                    FavouriteFlights.this.finish();
+            flightViewModel.flightList.addAll(flightDao.getFlights());
+                getActivity().runOnUiThread(() -> {
+                    flightAdapter.setData(flightViewModel.flightList);
                 });
-            } else {
-                runOnUiThread(() -> {
-                    flightAdapter.setData(flights);
-                });
-            }
+
         });
+    }
+
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.menu_help)
+        {
+            MainActivity.showAlertDialog(getContext(),getResources().getString(R.string.favourite_help_title),getResources().getString(R.string.favourite_help_message),
+                    new String[]{getResources().getString(R.string.main_positive_button_label),
+                            getResources().getString(R.string.main_negative_button_label)},null,null);
+        }
+
+        return true;
     }
 
 
     @Override
     public void onItemClickListener(Flight flight, int position) {
 
-        Intent intent = new Intent(this, FlightDetail.class);
-        intent.putExtra(API_KEYS.FLIGHT_DETAIL, flight);
-        startActivity(intent);
+        Fragment fragment = new FlightDetail();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(API_KEYS.FLIGHT_DETAIL,flight);
+        fragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
 
     }
 
     @Override
     public void onLongClickListener(Flight flight, int position) {
-        MainActivity.showAlertDialog(this, getResources().getString(R.string.do_you_want_delete_record) + position, getResources().getString(R.string.please_confirm), new String[]{getResources().getString(R.string.yes), getResources().getString(R.string.cancel)}, this, flight);
+        MainActivity.showAlertDialog(getContext(), getResources().getString(R.string.do_you_want_delete_record) + position, getResources().getString(R.string.please_confirm), new String[]{getResources().getString(R.string.yes), getResources().getString(R.string.cancel)}, this, flight);
 
     }
 
@@ -97,12 +129,16 @@ public class FavouriteFlights extends AppCompatActivity implements OnItemClickLi
         Executor thread = Executors.newSingleThreadExecutor();
         thread.execute(() -> {
             flightDao.deleteFlight(flight.flight_id);
-            runOnUiThread(() -> {
-                MainActivity.snackBar(this,
-                        getResources().getString(R.string.selected_record_deleted_successfully), favouritelistingBinding.getRoot());
-                flights.remove(flight);
-                flightAdapter.setData(flights);
+
+            flightViewModel.flightList.remove(flight);
+
+            getActivity().runOnUiThread(()->{
+                flightAdapter.notifyDataSetChanged();
             });
+
+                MainActivity.snackBar(getContext(), getResources().getString(R.string.selected_record_deleted_successfully), favouritelistingBinding.getRoot());
+
+
         });
 
 

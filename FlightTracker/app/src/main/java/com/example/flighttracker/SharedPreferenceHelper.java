@@ -25,7 +25,7 @@ public class SharedPreferenceHelper {
 
     public static  String getStringValue(String key)
     {
-       return sharedPreferences.getString(key,"");
+       return sharedPreferences.getString(key,null);
     }
 
 }
