@@ -201,7 +201,7 @@ public class MainFragment extends Fragment implements OnItemClickListener {
                 if(flightDao.getFlights().size()>0)
                 {
                     getActivity().runOnUiThread(()-> {
-                        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new FavouriteFlights()).addToBackStack(API_KEYS.FRAGMENT_FAVOURITE).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new FavouriteFlights()).addToBackStack(API_KEYS.FRAGMENT_FAVOURITE).commit();
                     });
                 }
                 else

@@ -72,8 +72,6 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        favouritelistingBinding = DataBindingUtil.setContentView(getActivity(), R.layout.activity_favouritelisting);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         favouritelistingBinding.rvFights.setLayoutManager(linearLayoutManager);
         flightViewModel = new ViewModelProvider(this).get(FlightViewModel.class);
@@ -114,7 +112,7 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
         Bundle bundle = new Bundle();
         bundle.putParcelable(API_KEYS.FLIGHT_DETAIL,flight);
         fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(API_KEYS.FLIGHT_DETAIL).commit();
 
     }
 
