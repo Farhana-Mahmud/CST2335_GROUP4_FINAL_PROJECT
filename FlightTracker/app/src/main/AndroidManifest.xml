@@ -20,6 +20,9 @@
             android:name=".FlightDetail"
             android:exported="false" />
         <activity
+            android:name=".FavouriteFlights"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

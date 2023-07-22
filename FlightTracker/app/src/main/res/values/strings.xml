@@ -30,4 +30,5 @@
     <string name="departure_airport">Departure Airport</string>
     <string name="save_to_favourite">Save to favourite</string>
     <string name="add_into_favourite" >Add into favourite successfully</string>
+    <string name="no_record_found">Sorry! No Record in Favourite</string>
 </resources>
