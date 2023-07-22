@@ -8,9 +8,12 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         activityMainBinding.btnSearch.setOnClickListener(view -> {
             String airportCode = activityMainBinding.editSearch.getText().toString();
             if (TextUtils.isEmpty(airportCode)) {
-                showAlertDialog(MainActivity.this, getResources().getString(R.string.hint_airport_code), getResources().getString(R.string.airport_code_warning), new String[]{getResources().getString(R.string.ok),getResources().getString(R.string.cancel)});
+                showAlertDialog(MainActivity.this, getResources().getString(R.string.hint_airport_code), getResources().getString(R.string.airport_code_warning), new String[]{getResources().getString(R.string.ok),getResources().getString(R.string.cancel)},null,null);
             } else {
                 if (isNetworkConnected()) {
                     activityMainBinding.pbLoader.setVisibility(View.VISIBLE);
@@ -129,11 +132,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
-   public void showAlertDialog(Context context, String title, String message, String[] buttonTitles) {
+   public static void showAlertDialog(Context context, String title, String message, String[] buttonTitles,PositiveClickListener positiveClickListener,Flight flight) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(title).setMessage(message).setPositiveButton(buttonTitles[0], new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if(positiveClickListener!=null)
+                        {
+                            positiveClickListener.onUserConfirmation(flight);
+                        }
 
                     }
                 }).setNegativeButton(buttonTitles[1], new DialogInterface.OnClickListener() {
@@ -153,5 +160,28 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         intent.putExtra(API_KEYS.FLIGHT_DETAIL,flight);
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.menu_help)
+        {
+            showAlertDialog(this,getResources().getString(R.string.main_help_title),getResources().getString(R.string.main_help_message),
+                    new String[]{getResources().getString(R.string.main_positive_button_label),
+                            getResources().getString(R.string.main_negative_button_label)},null,null);
+        }
+        else if(item.getItemId()==R.id.menu_favourite)
+        {
+                Intent intent = new Intent(MainActivity.this, FavouriteFlights.class);
+                startActivity(intent);
+        }
+        return true;
     }
 }

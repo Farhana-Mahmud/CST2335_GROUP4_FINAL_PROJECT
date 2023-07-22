@@ -31,4 +31,8 @@
     <string name="save_to_favourite">Save to favourite</string>
     <string name="add_into_favourite" >Add into favourite successfully</string>
     <string name="no_record_found">Sorry! No Record in Favourite</string>
+    <string name="do_you_want_delete_record">"Do you want to delete the record on "</string>
+    <string name="please_confirm">Please Confirm\n</string>
+    <string name="yes">Yes\n</string>
+    <string name="selected_record_deleted_successfully">Selected Record Deleted Successfully</string>
 </resources>

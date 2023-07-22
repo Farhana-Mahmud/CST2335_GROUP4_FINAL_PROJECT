@@ -18,6 +18,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
     private List<Flight> data;
     private OnItemClickListener onItemClickListener;
+    private OnLongClickListener onLongClickListener;
 
     public FlightAdapter(List<Flight>data)
     {
@@ -26,6 +27,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
     }
 
     @NonNull
@@ -38,6 +43,16 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     @Override
     public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
         Flight flight = data.get(position);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(onLongClickListener!=null)
+                {
+                    onLongClickListener.onLongClickListener(flight,position);
+                }
+                return true;
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
