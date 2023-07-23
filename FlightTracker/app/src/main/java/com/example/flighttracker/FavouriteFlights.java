@@ -46,6 +46,8 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener,On
     private FlightAdapter flightAdapter;
     private ActivityFavouritelistingBinding favouritelistingBinding;
 
+    private OnFragmentEvent onFragmentEvent;
+
     FlightDatabase flightDatabase;
     FlightDao flightDao;
 
@@ -67,7 +69,9 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener,On
             inflater.inflate(R.menu.help_menu_detail,menu);
     }
 
-
+    public void setOnFragmentEvent(OnFragmentEvent onFragmentEvent) {
+        this.onFragmentEvent = onFragmentEvent;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -108,12 +112,11 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener,On
     @Override
     public void onItemClickListener(Flight flight, int position) {
 
-        Fragment fragment = new FlightDetail();
-        Bundle bundle = new Bundle();
-        bundle.putInt(API_KEYS.FRAGMENT_FAVOURITE,1);
-        bundle.putParcelable(API_KEYS.FLIGHT_DETAIL,flight);
-        fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(API_KEYS.FLIGHT_DETAIL).commit();
+        if(onFragmentEvent!=null)
+        {
+            onFragmentEvent.onItemClickInFragment(flight,position);
+        }
+
 
     }
 

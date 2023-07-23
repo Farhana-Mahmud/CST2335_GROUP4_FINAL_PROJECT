@@ -49,6 +49,7 @@ import java.util.concurrent.Executors;
 
 public class MainFragment extends Fragment implements OnItemClickListener {
 
+    private OnFragmentEvent onFragmentEvent;
     private FlightAdapter flightAdapter;
     private FragmentMainBinding fragmentMainBinding;
     private RequestQueue requestQueue;
@@ -57,6 +58,9 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     FlightDao flightDao;
 
 
+    public void setOnFragmentEvent(OnFragmentEvent onFragmentEvent) {
+        this.onFragmentEvent = onFragmentEvent;
+    }
 
     @Nullable
     @Override
@@ -170,52 +174,17 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onItemClickListener(Flight flight, int position) {
 
-        Fragment fragment = new FlightDetail();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(API_KEYS.FLIGHT_DETAIL,flight);
-        fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(API_KEYS.FLIGHT_DETAIL).commit();
+
+       if(onFragmentEvent!=null)
+       {
+           onFragmentEvent.onItemClickInFragment(flight,position);
+       }
 
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.help_menu_main,menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId()==R.id.menu_help)
-        {
-            MainActivity.showAlertDialog(getActivity(),getResources().getString(R.string.main_help_title),getResources().getString(R.string.main_help_message),
-                    new String[]{getResources().getString(R.string.main_positive_button_label),
-                            getResources().getString(R.string.main_negative_button_label)},null,null);
-        }
-        else if(item.getItemId()==R.id.menu_favourite)
-        {
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(()->{
-                if(flightDao.getFlights().size()>0)
-                {
-                    getActivity().runOnUiThread(()-> {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new FavouriteFlights()).addToBackStack(API_KEYS.FRAGMENT_FAVOURITE).commit();
-                    });
-                }
-                else
-                { getActivity().runOnUiThread(()-> {
-                        MainActivity.createToast(getActivity(),getActivity().getResources().getString(R.string.no_record_found));
-                     });
-                }
-            });
 
 
-
-        }
-        return true;
-    }
 
 
 }
