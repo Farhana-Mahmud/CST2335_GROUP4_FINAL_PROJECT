@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_flight"
+        android:icon="@drawable/baseline_flight_24"
+        android:title="@string/flight_tracker"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_help"
+        android:icon="@drawable/baseline_help_24"
+        app:showAsAction="always"
+        android:title="@string/help"
+        android:visible="true" />
+
+</menu>

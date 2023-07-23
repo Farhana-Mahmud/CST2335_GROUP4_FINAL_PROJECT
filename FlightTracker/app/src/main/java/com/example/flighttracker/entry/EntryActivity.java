@@ -29,7 +29,7 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.help_menu_detail,menu);
+        getMenuInflater().inflate(R.menu.menu_entry,menu);
         return true;
     }
 
@@ -39,6 +39,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
         if(item.getItemId()==R.id.menu_help)
         {
             MainActivity.showAlertDialog(this,getResources().getString(R.string.entry_help_title),getResources().getString(R.string.entry_help_detail),new String[]{getResources().getString(R.string.ok),getResources().getString(R.string.cancel)},null,null);
+        }
+        else if(item.getItemId()==R.id.menu_flight)
+        {
+            Intent intent = new Intent(EntryActivity.this, MainActivity.class);
+            startActivity(intent);
         }
          return true;
     }

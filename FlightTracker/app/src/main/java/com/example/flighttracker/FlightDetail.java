@@ -86,7 +86,10 @@ public class FlightDetail extends Fragment implements View.OnClickListener {
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(()->{
                 flightDao.insert(flight);
-                getActivity().runOnUiThread(()->MainActivity.snackBar(getContext(),getResources().getString(R.string.add_into_favourite),flightDetailBinding.getRoot()));// Adds to database
+                getActivity().runOnUiThread(
+                        ()->MainActivity.snackBar(getContext(),getResources().getString(R.string.add_into_favourite),flightDetailBinding.getRoot()));
+                // Adds to database
+                getActivity().getSupportFragmentManager().popBackStack();
             });
         }
 

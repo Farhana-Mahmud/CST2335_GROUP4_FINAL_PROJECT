@@ -78,7 +78,7 @@ public class MainFragment extends Fragment implements OnItemClickListener {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragmentMainBinding.rvFights.setLayoutManager(linearLayoutManager);
        fragmentMainBinding.pbLoader.setVisibility(View.GONE);
-        flightAdapter = new FlightAdapter(new ArrayList<>());
+        flightAdapter = new FlightAdapter(new ArrayList<>(),false);
         flightAdapter.setOnItemClickListener(this::onItemClickListener);
         fragmentMainBinding.rvFights.setAdapter(flightAdapter);
         flightDatabase = Room.databaseBuilder(getActivity(),FlightDatabase.class,API_KEYS.DATABASE_NAME).build();
@@ -216,4 +216,6 @@ public class MainFragment extends Fragment implements OnItemClickListener {
         }
         return true;
     }
+
+
 }

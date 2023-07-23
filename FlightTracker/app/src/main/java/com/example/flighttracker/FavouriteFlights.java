@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FavouriteFlights extends Fragment implements OnItemClickListener, OnLongClickListener, PositiveClickListener {
+public class FavouriteFlights extends Fragment implements OnItemClickListener,OnDeleteClickListener, PositiveClickListener {
 
     private FlightAdapter flightAdapter;
     private ActivityFavouritelistingBinding favouritelistingBinding;
@@ -75,9 +75,9 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         favouritelistingBinding.rvFights.setLayoutManager(linearLayoutManager);
         flightViewModel = new ViewModelProvider(this).get(FlightViewModel.class);
-        flightAdapter = new FlightAdapter(new ArrayList<>());
+        flightAdapter = new FlightAdapter(new ArrayList<>(),true);
         flightAdapter.setOnItemClickListener(this::onItemClickListener);
-        flightAdapter.setOnLongClickListener(this::onLongClickListener);
+        flightAdapter.setOnDeleteClickListener(this::onDeleteClickListener);
         favouritelistingBinding.rvFights.setAdapter(flightAdapter);
         flightDatabase = Room.databaseBuilder(getContext(), FlightDatabase.class, API_KEYS.DATABASE_NAME).build();
         flightDao = flightDatabase.flightDao();
@@ -117,11 +117,7 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
 
     }
 
-    @Override
-    public void onLongClickListener(Flight flight, int position) {
-        MainActivity.showAlertDialog(getContext(), getResources().getString(R.string.do_you_want_delete_record) + position, getResources().getString(R.string.please_confirm), new String[]{getResources().getString(R.string.yes), getResources().getString(R.string.cancel)}, this, flight);
 
-    }
 
     @Override
     public void onUserConfirmation(Flight flight) {
@@ -136,11 +132,16 @@ public class FavouriteFlights extends Fragment implements OnItemClickListener, O
             });
 
                 MainActivity.snackBar(getContext(), getResources().getString(R.string.selected_record_deleted_successfully), favouritelistingBinding.getRoot());
-
+                getActivity().getSupportFragmentManager().popBackStack();
 
         });
 
 
     }
 
+    @Override
+    public void onDeleteClickListener(Flight flight, int position) {
+        MainActivity.showAlertDialog(getContext(), getResources().getString(R.string.do_you_want_delete_record) + position, getResources().getString(R.string.please_confirm), new String[]{getResources().getString(R.string.yes), getResources().getString(R.string.cancel)}, this, flight);
+
+    }
 }

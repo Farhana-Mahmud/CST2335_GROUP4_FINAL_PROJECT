@@ -10,49 +10,59 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flighttracker.databinding.FlightListItemBinding;
+import com.example.flighttracker.databinding.FlightListItemWithDeleteBinding;
 import com.example.flighttracker.generated.callback.OnClickListener;
 
 import java.util.List;
 
-public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightViewHolder> {
+public class FlightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Flight> data;
+    Boolean isFavourite;
     private OnItemClickListener onItemClickListener;
-    private OnLongClickListener onLongClickListener;
+    private OnDeleteClickListener onDeleteClickListener;
 
-    public FlightAdapter(List<Flight>data)
+    public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
+        this.onDeleteClickListener = onDeleteClickListener;
+    }
+
+    public FlightAdapter(List<Flight>data, boolean isFavourite)
     {
         this.data = data;
+        this.isFavourite = isFavourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        isFavourite = favourite;
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
-        this.onLongClickListener = onLongClickListener;
-    }
+
 
     @NonNull
     @Override
-    public FlightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        FlightListItemBinding view = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.flight_list_item,parent,false);
-        return new FlightViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(isFavourite){
+            FlightListItemWithDeleteBinding view = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.flight_list_item_with_delete,parent,false);
+            return new FlightViewHolderWithDelete(view);
+        }
+        else
+        {
+            FlightListItemBinding view = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.flight_list_item,parent,false);
+            return new FlightViewHolder(view);
+        }
+
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Flight flight = data.get(position);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(onLongClickListener!=null)
-                {
-                    onLongClickListener.onLongClickListener(flight,position);
-                }
-                return true;
-            }
-        });
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +72,27 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
                 }
             }
         });
-        holder.onBind(flight);
+        if(holder instanceof FlightViewHolder)
+        {
+            ((FlightViewHolder)holder).onBind(flight);
+        }
+        else
+        {
+
+
+            ((FlightViewHolderWithDelete)holder).onBind(flight);
+            ((FlightViewHolderWithDelete)holder).flightListItemBinding.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onDeleteClickListener!=null)
+                    {
+                        onDeleteClickListener.onDeleteClickListener(flight,position);
+                    }
+                }
+            });
+
+        }
+
     }
 
     @Override
@@ -88,6 +118,25 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         {
 
             flightListItemBinding.txtFlightNoValue.setText(flight.getmFlightNumber());
+
+
+        }
+
+    }
+
+    static class FlightViewHolderWithDelete extends  RecyclerView.ViewHolder
+    {
+        FlightListItemWithDeleteBinding flightListItemBinding;
+        public FlightViewHolderWithDelete(@NonNull FlightListItemWithDeleteBinding flightListItemBinding) {
+            super(flightListItemBinding.getRoot());
+            this.flightListItemBinding =flightListItemBinding;
+
+        }
+        void onBind(Flight flight)
+        {
+
+            flightListItemBinding.txtFlightNoValue.setText(flight.getmFlightNumber());
+
 
 
         }
