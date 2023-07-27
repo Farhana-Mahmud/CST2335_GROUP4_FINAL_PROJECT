@@ -13,8 +13,8 @@
     <string name="help">Help</string>
     <string name="favourite">Favourite</string>
     <string name="home">Home</string>
-    <string name="main_help_title">Search Airport by It\'s code Name</string>
-    <string name="main_help_message">Instruction to use</string>
+    <string name="main_help_title">Search Airport by IATA code</string>
+    <string name="main_help_message">Type the IATA airport code to get a list of flights</string>
     <string name="main_positive_button_label">Ok</string>
     <string name="main_negative_button_label">Cancel\n</string>
     <string name="hint_airport_code_input">Airport code is require</string>

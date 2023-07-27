@@ -8,7 +8,7 @@ public class API_KEYS {
     public static final String FRAGMENT_DETAIL="detail";
     public  static final String FRAGMENT_FAVOURITE="favourite";
     public static final String FLIGHT_DETAIL = "FLIGHT_DETAIL" ;
-    public  static final String API_KEY="b3b7b955224022da60cd6f3590c5b3df";
+    public  static final String API_KEY="caabe858036a9f2b5d3a39e225df3b50";
     public static final String API_URL= "http://api.aviationstack.com/v1/flights?access_key=" + API_KEY + "&dep_iata=";
     public static final String PREFERENCE_NAME = "flight_tracker_preference";
     public static final String AIRPORT_CODE = "AIRPORT_CODE";
