@@ -15,27 +15,60 @@ import com.example.flighttracker.generated.callback.OnClickListener;
 
 import java.util.List;
 
+/**
+ * @author Farhana Mahmud
+ * @version 1.0
+ */
 public class FlightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    /**
+     * This saves the list of flight type objects
+     */
     private List<Flight> data;
+    /**
+     * This variable denotes if a flight is a favourite or not
+     */
     Boolean isFavourite;
+    /**
+     * Initialize OnItemClickListener
+     */
     private OnItemClickListener onItemClickListener;
+    /**
+     * Initialize OnDeleteClickListener
+     */
     private OnDeleteClickListener onDeleteClickListener;
 
+    /**
+     * Deletes data from the flight list
+     * @param onDeleteClickListener
+     */
     public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
         this.onDeleteClickListener = onDeleteClickListener;
     }
 
+    /**
+     * Saves a flight into favourites
+     * @param data is the list of flights
+     * @param isFavourite if added
+     */
     public FlightAdapter(List<Flight>data, boolean isFavourite)
     {
         this.data = data;
         this.isFavourite = isFavourite;
     }
 
+    /**
+     * This methods sets if a flight as favourite
+     * @param favourite
+     */
     public void setFavourite(Boolean favourite) {
         isFavourite = favourite;
     }
 
+    /**
+     * Sets the attribute of a flight
+     * @param onItemClickListener
+     */
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

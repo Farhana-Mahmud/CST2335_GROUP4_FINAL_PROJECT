@@ -1,5 +1,10 @@
 package com.example.flighttracker;
 
+/**
+ * This class has all the API keys
+ * @author Farhana Mahmud
+ * @version 1.0
+ */
 public class API_KEYS {
     public static final String DATA = "data";
     public static final String DATABASE_NAME="flight_database";
