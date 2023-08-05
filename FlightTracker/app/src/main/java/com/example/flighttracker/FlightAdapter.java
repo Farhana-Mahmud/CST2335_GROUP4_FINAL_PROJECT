@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flighttracker.databinding.FlightListItemBinding;
 import com.example.flighttracker.databinding.FlightListItemWithDeleteBinding;
-import com.example.flighttracker.generated.callback.OnClickListener;
+//import com.example.flighttracker.generated.callback.OnClickListener;
 
 import java.util.List;
 
