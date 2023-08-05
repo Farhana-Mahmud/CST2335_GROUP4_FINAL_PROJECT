@@ -24,10 +24,12 @@ import com.example.flighttracker.databinding.ActivityFlightDetailBinding;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+
 public class FlightDetail extends Fragment implements View.OnClickListener {
 
 
     ActivityFlightDetailBinding flightDetailBinding;
+
     FlightDatabase flightDatabase;
     FlightDao flightDao;
     Flight flight;
