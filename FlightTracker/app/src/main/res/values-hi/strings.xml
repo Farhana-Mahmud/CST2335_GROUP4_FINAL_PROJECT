@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">अवनीत का एंड्रॉयड प्रयोगशाला</string>
+   <string name="hello_message">duniya ko salam</string>
+      <string name="button_message">Eh button sankake</string>
+ <string name="editmessage" >I\'m an EditText</string>
+
+    <string name="hinttext">kuj or likho</string>
+    <string name="message_goes_here">Currency ki conversion</string>
+    <string name="time_goes_here">Time goes here</string>
+    <string name="todo">TODO</string>
+    <string name="response">INR</string>
+    <string name="send">CAD</string>
+    <string name="der">TODO</string>
+    <string name="Button1st">INR</string>
+    <string name="TextView">pehlah string kimat</string>
+    <string name="CAD">भारतीय रुपया</string>
+    <string name="AUD">रुपये</string>
+ <string name="TextView2">बेस मुद्रा कोड है</string>
+ <string name="TextView3">बेस मुद्रा का नाम है</string>
+
+</resources>

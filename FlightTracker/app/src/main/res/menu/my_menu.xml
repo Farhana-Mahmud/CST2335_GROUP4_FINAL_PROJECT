@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item"
+        android:icon="@drawable/history"
+        android:title="Person1"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_1"
+        android:icon="@drawable/history"
+        android:title="Person1"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_2"
+        android:icon="@drawable/history"
+        android:title="Person2"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item_3"
+        android:icon="@drawable/history"
+        android:title="Person3"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_4"
+        android:icon="@drawable/history"
+        android:title="Person4"
+        app:showAsAction="never" />
+</menu>

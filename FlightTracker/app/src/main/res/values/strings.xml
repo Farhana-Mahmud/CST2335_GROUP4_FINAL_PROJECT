@@ -44,4 +44,20 @@
     <string name="detail_help_message">Change as per your understanding\n</string>
     <string name="detail_help_title">Change as per your understanding</string>
     <string name="delete">Delete</string>
+    <string name="hello_message">Hello world!</string>
+    <string name="button_message">I\'mbutton</string>
+    <string name="editmessage" >I\'m an EditText</string>
+    <string name="hinttext">Write Something else</string>
+    <string name="message_goes_here">Message goes here</string>
+    <string name="time_goes_here">Time goes here</string>
+    <string name="todo">TODO</string>
+    <string name="response">Message goes here1</string>
+    <string name="send">Time goes here</string>
+    <string name="der">TODO</string>
+    <string name="Button1st">send</string>
+    <string name="TextView">1st Text View</string>
+    <string name="CAD">CAD</string>
+    <string name="TextView2">2nd Text View</string>
+    <string name="TextView3">doosra Text sanket</string>
+    <string name="AUD">AUD</string>
 </resources>

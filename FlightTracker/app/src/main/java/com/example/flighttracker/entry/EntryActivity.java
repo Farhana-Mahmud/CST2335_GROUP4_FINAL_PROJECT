@@ -1,16 +1,16 @@
 package com.example.flighttracker.entry;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.flighttracker.FlightDetail;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.example.flighttracker.CurrencyConverter;
 import com.example.flighttracker.MainActivity;
 import com.example.flighttracker.R;
 import com.example.flighttracker.databinding.ActivityEntryBinding;
@@ -45,6 +45,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EntryActivity.this, MainActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId()==R.id.menu_help2)
+        {
+            Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
+            startActivity(intent);
+        }
          return true;
     }
 
@@ -55,7 +60,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EntryActivity.this, MainActivity.class);
             startActivity(intent);
         }
+else if(view.getId()==R.id.btn_currency_converter){
 
+            Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
+            startActivity(intent);
+        }
 
 
 

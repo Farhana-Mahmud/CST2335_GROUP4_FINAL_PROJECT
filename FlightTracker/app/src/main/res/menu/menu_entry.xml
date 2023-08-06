@@ -14,5 +14,11 @@
         app:showAsAction="always"
         android:title="@string/help"
         android:visible="true" />
+    <item
+        android:id="@+id/menu_help2"
+        android:icon="@drawable/baseline_help_24"
+        app:showAsAction="always"
+        android:title="@string/help"
+        android:visible="true" />
 
 </menu>
