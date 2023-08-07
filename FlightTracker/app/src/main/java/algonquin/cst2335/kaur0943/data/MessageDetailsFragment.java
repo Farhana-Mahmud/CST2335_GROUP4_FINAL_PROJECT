@@ -1,4 +1,4 @@
-package com.example.flighttracker.data;
+package algonquin.cst2335.kaur0943.data;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.flighttracker.ChatMessage;
 import com.example.flighttracker.databinding.ActivityChatRoom1Binding;
 import com.example.flighttracker.databinding.Details1LayoutBinding;
+
+import algonquin.cst2335.kaur0943.ChatMessage;
+
+
 /**
  * A fragment that displays the details of a selected chat message.
  * This fragment is responsible for showing the message and its details in the chat room activity.

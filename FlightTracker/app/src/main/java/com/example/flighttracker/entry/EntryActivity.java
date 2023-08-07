@@ -10,10 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.example.flighttracker.CurrencyConverter;
 import com.example.flighttracker.MainActivity;
 import com.example.flighttracker.R;
 import com.example.flighttracker.databinding.ActivityEntryBinding;
+
+import algonquin.cst2335.kaur0943.CurrencyConverter;
 
 public class EntryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,9 +24,12 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityEntryBinding = DataBindingUtil.setContentView(this, R.layout.activity_entry);
+        setContentView(R.layout.activity_entry);
         activityEntryBinding.setOnClick(this);
-
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,7 +39,6 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if(item.getItemId()==R.id.menu_help)
         {
             MainActivity.showAlertDialog(this,getResources().getString(R.string.entry_help_title),getResources().getString(R.string.entry_help_detail),new String[]{getResources().getString(R.string.ok),getResources().getString(R.string.cancel)},null,null);
@@ -61,14 +64,8 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         }
 else if(view.getId()==R.id.btn_currency_converter){
-
             Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
             startActivity(intent);
         }
-
-
-
     }
-
-
 }

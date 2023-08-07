@@ -1,10 +1,11 @@
-package com.example.flighttracker.data;
+package algonquin.cst2335.kaur0943.data;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.flighttracker.R;
+
 
 /**
  * The main activity of the application.

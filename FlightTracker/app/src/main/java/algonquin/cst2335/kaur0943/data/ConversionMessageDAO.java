@@ -1,13 +1,13 @@
-package com.example.flighttracker.data;
+package algonquin.cst2335.kaur0943.data;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.flighttracker.ChatMessage;
-
 import java.util.List;
+
+import algonquin.cst2335.kaur0943.ChatMessage;
 /**
  * Data Access Object (DAO) interface for interacting with the database table containing chat messages.
  * This interface defines methods to insert, query, and delete chat messages from the database.

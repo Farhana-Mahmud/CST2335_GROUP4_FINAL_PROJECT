@@ -1,11 +1,11 @@
-package com.example.flighttracker.data;
+package algonquin.cst2335.kaur0943.data;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.flighttracker.ChatMessage;
-
 import java.util.ArrayList;
+
+import algonquin.cst2335.kaur0943.ChatMessage;
 /**
  * ViewModel class for managing chat messages and the selected message.
  * This class is used to hold and handle data related to chat messages in the application.

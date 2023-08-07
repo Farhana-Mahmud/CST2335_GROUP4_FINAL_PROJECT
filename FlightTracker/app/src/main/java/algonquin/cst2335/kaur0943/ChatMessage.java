@@ -1,4 +1,4 @@
-package com.example.flighttracker;
+package algonquin.cst2335.kaur0943;
 /**
  * Represents a chat message entity to be stored in the database.
  * Each ChatMessage object corresponds to a row in the database table.
@@ -8,7 +8,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class ChatMessage {
+public class ChatMessage{
 
     @PrimaryKey(autoGenerate=true)
     @ColumnInfo(name="id")
@@ -37,7 +37,7 @@ public class ChatMessage {
      * @param t The timestamp when the message was sent.
      * @param sent A boolean indicating whether the message is a sent button or not.
      */
-     ChatMessage(String m, String t, boolean sent)
+    public ChatMessage(String m, String t, boolean sent)
     {
         message = m;
         timeSent = t;

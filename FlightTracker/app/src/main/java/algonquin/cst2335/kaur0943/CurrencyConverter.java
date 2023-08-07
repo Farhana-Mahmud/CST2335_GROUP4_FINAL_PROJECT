@@ -1,5 +1,9 @@
-package com.example.flighttracker;
-
+/**
+ * Student name: Avneet kaur
+ * Student Number:041059813
+ * Student Description: It shows the activity libked to their respective layout files
+ */
+package algonquin.cst2335.kaur0943;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.flighttracker.R;
 import com.example.flighttracker.databinding.ActivityChatRoom1Binding;
 import com.example.flighttracker.databinding.ReceiveMessageBinding;
 import com.example.flighttracker.databinding.SentMessageBinding;
@@ -41,7 +46,6 @@ import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import algonquin.cst2335.kaur0943.ChatMessage;
 import algonquin.cst2335.kaur0943.data.ConversionMessageDAO;
 import algonquin.cst2335.kaur0943.data.ConversionRoomViewModel;
 import algonquin.cst2335.kaur0943.data.MessageDatabase;
@@ -85,7 +89,6 @@ public class CurrencyConverter extends AppCompatActivity {
      * It shows the mconversionMessageDAO
      */
     private ConversionMessageDAO mDAO;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -110,33 +113,33 @@ public class CurrencyConverter extends AppCompatActivity {
         // Retrieve the stored value from SharedPreferences
         String storedAmountValue = sharedPreferences.getString("amountValue", "");
         // Set the value to the EditText
-        binding.textInput.setText(storedAmountValue);
-        binding.imageButton2.setOnClickListener(click -> {
-            // Assuming you have the following EditText views in your layout:
-            EditText editTextFrom = findViewById(R.id.editTextFrom);
-            EditText editTextTo = findViewById(R.id.editTextTo);
+          binding.textInput.setText(storedAmountValue);
+           binding.imageButton2.setOnClickListener(click -> {
+               // Assuming you have the following EditText views in your layout:
+               EditText editTextFrom = findViewById(R.id.editTextFrom);
+               EditText editTextTo = findViewById(R.id.editTextTo);
 
 // Retrieve the input values from the EditText views
-            String currencyFrom = editTextFrom.getText().toString();
-            String currencyTo = editTextTo.getText().toString();
+               String currencyFrom = editTextFrom.getText().toString();
+               String currencyTo = editTextTo.getText().toString();
 
-            /**
-             * This will assigns a value to the button which is linked to the online API linked and it will show the conversion
-             */
+               /**
+                * This will assigns a value to the button which is linked to the online API linked and it will show the conversion
+                */
             String stringURL = null;
 
-            //stringURL = "https://api.getgeoapi.com/v2/currency/convert?format=json&from=AUD&to=CAD&amount=1&api_key=b0da6c968adc84d139786ca08ffb3628cf2f8159&format=json";
+                //stringURL = "https://api.getgeoapi.com/v2/currency/convert?format=json&from=AUD&to=CAD&amount=1&api_key=b0da6c968adc84d139786ca08ffb3628cf2f8159&format=json";
 // Construct the URL for the API request with the input values
-            try {
-                stringURL = "https://api.getgeoapi.com/v2/currency/convert?format=json&from=" +
-                        URLEncoder.encode(currencyFrom, "UTF-8") +
-                        "&to=" + URLEncoder.encode(currencyTo, "UTF-8") +
-                        "&amount=1&api_key=b0da6c968adc84d139786ca08ffb3628cf2f8159&format=json";
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
+               try {
+                   stringURL = "https://api.getgeoapi.com/v2/currency/convert?format=json&from=" +
+                           URLEncoder.encode(currencyFrom, "UTF-8") +
+                           "&to=" + URLEncoder.encode(currencyTo, "UTF-8") +
+                           "&amount=1&api_key=b0da6c968adc84d139786ca08ffb3628cf2f8159&format=json";
+               } catch (UnsupportedEncodingException e) {
+                   throw new RuntimeException(e);
+               }
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL, null, (response) -> {
+               JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL, null, (response) -> {
                 try {
                     // Extract data from the response JSON object
                     String baseCurrencyCode = response.getString("base_currency_code");
@@ -149,26 +152,20 @@ public class CurrencyConverter extends AppCompatActivity {
                     String currencyName = cad.getString("currency_name");
                     String rate = cad.getString("rate");
                     String rateForAmount = cad.getString("rate_for_amount");
-                    binding.basecurrencycode.setText("The base currency Code is :" + baseCurrencyCode);
+                    binding.basecurrencycode.setText("The base currency Code is :"+baseCurrencyCode);
                     binding.basecurrencycode.setVisibility(View.VISIBLE);
-                    binding.basecurrencyname.setText("The base currency Name is :" + baseCurrencyName);
+                    binding.basecurrencyname.setText("The base currency Name is :"+baseCurrencyName);
                     binding.basecurrencyname.setVisibility(View.VISIBLE);
-                    binding.amount.setText("The amount is :" + amount);
+                    binding.amount.setText("The amount is :"+amount);
                     binding.amount.setVisibility(View.VISIBLE);
-                    binding.updatedDate.setText("The updatedDate is :" + updatedDate);
+                    binding.updatedDate.setText("The updatedDate is :"+updatedDate);
                     binding.updatedDate.setVisibility(View.VISIBLE);
-                    //binding.rts.setText("The rates :"+rates);
-                    //binding.rts.setVisibility(View.VISIBLE);
-                    // binding.cds.setText("The cad  is"+cad );
-                    // binding.cds.setVisibility(View.VISIBLE);
-                    binding.currencyName.setText("The currencyName  is" + currencyName);
+                     binding.currencyName.setText("The currencyName  is"+currencyName );
                     binding.currencyName.setVisibility(View.VISIBLE);
-                    binding.rt.setText("The rate is" + rate);
-                    binding.rt.setVisibility(View.VISIBLE);
-                    binding.rfa.setText("The rateForAmount is" + rateForAmount);
+                    binding.rt.setText("The rate is"+rate );
+                   binding.rt.setVisibility(View.VISIBLE);
+                    binding.rfa.setText("The rateForAmount is"+rateForAmount);
                     binding.rfa.setVisibility(View.VISIBLE);
-
-
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -181,7 +178,7 @@ public class CurrencyConverter extends AppCompatActivity {
  * id and the values converted
  */
 
-        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+           chatModel.selectedMessage.observe(this, (newMessageValue) -> {
 
             MessageDetailsFragment chatFragment = new MessageDetailsFragment(newMessageValue);
             FragmentManager fMgr = getSupportFragmentManager();
@@ -203,7 +200,7 @@ public class CurrencyConverter extends AppCompatActivity {
          * and then when the default language is selected it will display the default vales while
          * if the lanhuage will change it will see the values in the other folders
          */
-        // Get the current locale/language
+       // Get the current locale/language
         Locale currentLocale = getResources().getConfiguration().locale;
         String currentLanguage = currentLocale.getLanguage();
         // Set the button text based on the current language
@@ -218,6 +215,7 @@ public class CurrencyConverter extends AppCompatActivity {
         } else if (currentLanguage.equals("hi")) { // For Hindi
             binding.button4.setText(R.string.CAD); // Replace "AUD" with the appropriate key for "INR" in Hindi strings.xml
         }
+
 
 
         // Set the background color based on the current language
@@ -235,7 +233,7 @@ public class CurrencyConverter extends AppCompatActivity {
             String amountString = binding.textInput.getText().toString();
             String currencyFrom = "YOUR_SOURCE_CURRENCY";
             String currencyTo = "YOUR_TARGET_CURRENCY";
-            // Store the value in SharedPreferences
+             // Store the value in SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("amountValue", amountString);
             editor.apply();
@@ -248,7 +246,7 @@ public class CurrencyConverter extends AppCompatActivity {
             double convertedAmount = amount * 1.13548;
 
 
-            // Create the ChatMessage object with the converted amount
+             // Create the ChatMessage object with the converted amount
             ChatMessage chatMessage = new ChatMessage(String.valueOf(convertedAmount), "", true);
 
             // Insert the message into the database
@@ -281,14 +279,15 @@ public class CurrencyConverter extends AppCompatActivity {
             String currencyFrom = "YOUR_SOURCE_CURRENCY";
             String currencyTo = "YOUR_TARGET_CURRENCY";
 
+
             // Convert the amount from String to double
             double amount = Double.parseDouble(amountString);
 
-            // Calculate the converted amount manually using the exchange rate
+              // Calculate the converted amount manually using the exchange rate
             double convertedAmount = amount * 1 / 1.13548;
 
 
-            // Create the ChatMessage object with the converted amount
+              // Create the ChatMessage object with the converted amount
             ChatMessage chatMessage = new ChatMessage(String.valueOf(convertedAmount), "", false);
 
             // Insert the message into the database
@@ -304,7 +303,7 @@ public class CurrencyConverter extends AppCompatActivity {
             // Clear the previous text
             binding.textInput.setText("");
 
-            // Show a Toast message when the conversion is made
+             // Show a Toast message when the conversion is made
             Toast.makeText(this, "Conversion is made successfully.", Toast.LENGTH_SHORT).show();
 
 
@@ -312,7 +311,7 @@ public class CurrencyConverter extends AppCompatActivity {
 /**
  * This button will show the last query typed in the form of shared preferences
  */
-        binding.saveButton.setOnClickListener(click -> {
+        binding.saveButton.setOnClickListener(click->{
             String storedAmountValue2 = sharedPreferences.getString("amountValue", "");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Stored Amount Value");
@@ -321,7 +320,7 @@ public class CurrencyConverter extends AppCompatActivity {
                 // Handle the OK button click if needed, or leave it empty
             });
             builder.show();
-        });
+});
 
 
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
@@ -341,15 +340,12 @@ public class CurrencyConverter extends AppCompatActivity {
                 if (viewType == 0) {
                     SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
                     View root = binding.getRoot();
-                    return new MyRowHolder(binding.getRoot(), messages, mDAO, myAdapter);
+                    return new MyRowHolder(binding.getRoot(),messages, mDAO, myAdapter);
                 } else {
                     // Inflate the receive_message layout for viewType 1
                     ReceiveMessageBinding binding = ReceiveMessageBinding.inflate(getLayoutInflater(), parent, false);
                     return new MyRowHolder(binding.getRoot(), messages, mDAO, myAdapter);
                 }
-
-                ////SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
-                ////    return new MyRowHolder(binding.getRoot());
             }
 
             /**
@@ -363,13 +359,7 @@ public class CurrencyConverter extends AppCompatActivity {
                 ChatMessage chatMessage = messages.get(position);
                 holder.messageText.setText(chatMessage.getMessage());
                 holder.timeText.setText(chatMessage.getTimeSent());
-                ////holder.messageText.setText("");
-                //////holder.timeText.setText("");
-                /////  String obj=messages.get(position);
-                //////  holder.messageText.setText(obj);
-
             }
-
             /**
              * Returns the total number of items in the data set.
              *
@@ -379,7 +369,6 @@ public class CurrencyConverter extends AppCompatActivity {
             public int getItemCount() {
                 return messages.size();
             }
-
             /**
              * Returns the view type of the item at the specified position.
              *
@@ -397,18 +386,13 @@ public class CurrencyConverter extends AppCompatActivity {
             }
 
         });
-        //  return 0;
-        //  }
-
-
     }
-
     /**
      * Performs a currency conversion based on the given amount, source currency, and target currency.
      *
-     * @param amount       The amount to convert.
+     * @param amount The amount to convert.
      * @param currencyFrom The source currency code.
-     * @param currencyTo   The target currency code.
+     * @param currencyTo The target currency code.
      * @return The converted amount after the currency conversion.
      */
     private double performConversion(String amount, String currencyFrom, String currencyTo) {
@@ -423,13 +407,13 @@ public class CurrencyConverter extends AppCompatActivity {
         editor.apply();
 
 
+
         return convertedAmount;
     }
-
     /**
      * Overrides the back button press behavior to handle the Fragments in the back stack.
      */
-    // @Override
+   // @Override
     public void onBackPressed() {
         // Check if there are any Fragments in the back stack
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -440,7 +424,6 @@ public class CurrencyConverter extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
     /**
      * Creates the options menu and handles the selection of menu items.
      *
@@ -464,7 +447,6 @@ public class CurrencyConverter extends AppCompatActivity {
         item4.setTitle(Html.fromHtml("<font color='#FF00FF'>Person4</font>"));
         return true;
     }
-
     /**
      * Handles the selection of menu items.
      *
@@ -476,8 +458,8 @@ public class CurrencyConverter extends AppCompatActivity {
         int id = item.getItemId();
 
 
-        String words = "Version 1, created by Avneet kaur";
-        if (item.getItemId() == R.id.item) {
+        String words="Version 1, created by Avneet kaur";
+        if(item.getItemId()==R.id.item){
             String helpMessage = "Instructions for using the interface:\n\n" +
                     "- To perform currency conversion, enter the amount in the text input field and click the Convert button.\n" +
                     "- The converted currency details will be displayed below.\n" +
@@ -494,8 +476,9 @@ public class CurrencyConverter extends AppCompatActivity {
             builder.setMessage(helpMessage);
             builder.setPositiveButton("OK", null);
             builder.show();
-        } else if (item.getItemId() == R.id.item_1) {
-            words = "Riya did the message activity";
+        }
+        else if(item.getItemId()==R.id.item_1){
+            words="Riya did the message activity";
 // Launch Person1Activity
             int position = myAdapter.getItemCount() - 1; // Get the position of the last item in the list
 
@@ -531,11 +514,12 @@ public class CurrencyConverter extends AppCompatActivity {
             }
 
 
-        } else if (item.getItemId() == R.id.item_2) {
-            words = "Version 1, created by Avneet kaur";
+        }else if(item.getItemId()==R.id.item_2){
+            words="Version 1, created by Avneet kaur";
 
-        } else if (item.getItemId() == R.id.item_3) {
-            words = "Farhana did the shared preference part ";
+        }
+        else if(item.getItemId()==R.id.item_3){
+            words="Farhana did the shared preference part ";
             String storedAmountValue = sharedPreferences.getString("amountValue", "");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Stored Amount Value");
@@ -544,8 +528,9 @@ public class CurrencyConverter extends AppCompatActivity {
                 // Handle the OK button click if needed, or leave it empty
             });
             builder.show();
-        } else if (item.getItemId() == R.id.item_4) {
-            words = "Afnan did the fragment part";
+        }
+        else if(item.getItemId()==R.id.item_4){
+            words="Afnan did the fragment part";
             chatModel.selectedMessage.observe(this, (newMessageValue) -> {
 
                 MessageDetailsFragment chatFragment = new MessageDetailsFragment(newMessageValue);
@@ -556,15 +541,12 @@ public class CurrencyConverter extends AppCompatActivity {
                 tx.commit();
             });
         }
-        Toast.makeText(this, "You clicked on the" + words, Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"You clicked on the"+words, Toast.LENGTH_LONG).show();
         return true;
-
     }
-
     /**
      * ViewHolder class representing a row in the RecyclerView.
      */
-
     class MyRowHolder extends RecyclerView.ViewHolder {
         /**
          * Constructor for the ViewHolder.
@@ -579,13 +561,11 @@ public class CurrencyConverter extends AppCompatActivity {
         ArrayList<ChatMessage> messages;
         ConversionMessageDAO mDAO;
         RecyclerView.Adapter adt;
-
-        public MyRowHolder(@NonNull View itemView, ArrayList<ChatMessage> messages, ConversionMessageDAO mDAO, RecyclerView.Adapter adt) {
+        public MyRowHolder(@NonNull View itemView,ArrayList<ChatMessage> messages, ConversionMessageDAO mDAO, RecyclerView.Adapter adt) {
             super(itemView);
             this.messages = messages;
             this.mDAO = mDAO;
             this.adt = adt;
-
             itemView.setOnClickListener(clk -> {
              /*   //int position = getAbsoluteAdapterPosition();
                // ChatMessage selected = messages.get(position);
@@ -624,25 +604,11 @@ public class CurrencyConverter extends AppCompatActivity {
                                 .show();
 
                         });
-
-
-
-
-
-
                         builder.create().show();
-
-
 */
-
-
             });
-
-
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
-
-
         }
     }
 }
