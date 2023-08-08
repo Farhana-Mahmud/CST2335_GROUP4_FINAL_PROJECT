@@ -567,12 +567,12 @@ public class CurrencyConverter extends AppCompatActivity {
             this.mDAO = mDAO;
             this.adt = adt;
             itemView.setOnClickListener(clk -> {
-             /*   //int position = getAbsoluteAdapterPosition();
-               // ChatMessage selected = messages.get(position);
+               int position = getAbsoluteAdapterPosition();
+                ChatMessage selected = messages.get(position);
 
-               // chatModel.selectedMessage.postValue(selected);
+               chatModel.selectedMessage.postValue(selected);
                 //int position = getAbsoluteAdapterPosition();
-               // ChatMessage message = messages.get(position);
+                ChatMessage message = messages.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
                 builder.setMessage("Do you want to delete the message:" + messageText.getText());
                 builder.setNegativeButton("No", null);
@@ -605,10 +605,14 @@ public class CurrencyConverter extends AppCompatActivity {
 
                         });
                         builder.create().show();
-*/
+
             });
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
+        }
+
+        private int getAbsoluteAdapterPosition() {
+            return 0;
         }
     }
 }
