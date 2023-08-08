@@ -22,8 +22,9 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".CurrencyConverter"
-            android:exported="true" />
+            android:name="algonquin.cst2335.kaur0943.CurrencyConverter"
+            android:label="Currency Converter">
+        </activity>
         <activity
             android:name=".entry.EntryActivity"
             android:exported="true">
@@ -33,6 +34,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+
         </activity>
     </application>
 
