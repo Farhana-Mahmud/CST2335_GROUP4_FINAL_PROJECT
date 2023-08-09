@@ -46,4 +46,32 @@
     <string name="detail_help_title">Change as per your understanding</string>
     <string name="delete">Delete</string>
     <string name="general_knowledge">General Knowledge</string>
+
+    <string name="button_message">Eh button sankake</string>
+
+    <string name="editmessage">I\'m an EditText</string>
+
+    <string name="hinttext">kuj or likho</string>
+
+    <string name="message_goes_here">Currency ki conversion</string>
+
+    <string name="time_goes_here">Time goes here</string>
+    <string name="todo">TODO</string>
+
+
+    <string name="response">INR</string>
+
+    <string name="send">CAD</string>
+    <string name="der">TODO</string>
+    <string name="Button1st">INR</string>
+    <string name="TextView">pehlah string kimat</string>
+
+    <string name="CAD">CAD</string>
+    <string name="TextView2">2nd Text View</string>
+
+    <string name="TextView3">doosra Text sanket</string>
+    <string name="AUD">AUD</string>
+
+    <string name="hello_message">Hello world!</string>
+
 </resources>
