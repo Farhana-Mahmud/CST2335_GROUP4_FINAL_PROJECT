@@ -47,10 +47,23 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * @author Farhana Mahmud
+ * @version 1.0
+ */
 public class MainFragment extends Fragment implements OnItemClickListener {
 
+    /**
+     * Initialize FlightAdapter
+     */
     private FlightAdapter flightAdapter;
+    /**
+     * Initialize FragmentMainBinding
+     */
     private FragmentMainBinding fragmentMainBinding;
+    /**
+     * Initialize RequestQueue object
+     */
     private RequestQueue requestQueue;
 
     FlightDatabase flightDatabase;
@@ -115,13 +128,20 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     }
 
 
-
-    // Check network connectivity
+    /**
+     * This method checks the network connectivity
+     * @return connection status
+     */
     private boolean isNetworkConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
+
+    /**
+     * This method fetches data from the API
+     * @param airportCode is used to check the flight details
+     */
     private void fetchDataFromAPI(String airportCode) {
         String apiUrl = API_KEYS.API_URL+ airportCode;
 
@@ -150,6 +170,12 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
         requestQueue.add(jsonObjectRequest);
     }
+
+    /**
+     * Populates the ArrayList with list of flight details
+     * @param response
+     * @return
+     */
     private List<Flight> parseFlightData(JSONObject response) {
         List<Flight> flights = new ArrayList<>();
         try {

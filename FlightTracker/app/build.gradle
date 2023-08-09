@@ -45,5 +45,24 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.android.volley:volley:1.2.1'
+
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }
+
+}
+
+android.applicationVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        description "Generates Javadoc for $variant.name."
+
+        source = variant.javaCompile.source
+        destinationDir = file("$rootDir/javadoc/")
+        failOnError false
+
+        doFirst {
+            ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+            options.addStringOption "-show-members", "package"
+        }
+    }}
+

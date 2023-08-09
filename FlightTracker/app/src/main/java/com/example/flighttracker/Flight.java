@@ -11,14 +11,18 @@ import androidx.versionedparcelable.ParcelField;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 @Entity(tableName = "flight_table")
 
 public class Flight implements Parcelable {
+
 
     public String mFlightNumber,mTerminal,mGate, mDelay, departure_airport,arrival_airport,status;
     @PrimaryKey(autoGenerate = true)
     @NonNull
     public Long flight_id;
+
+
     public Flight(String departure_airport, String arrival_airport, String status, String mFlightNumber, String mTerminal, String mGate, String mdelay) {
         this.departure_airport = departure_airport;
         this.arrival_airport = arrival_airport;
@@ -28,6 +32,8 @@ public class Flight implements Parcelable {
         this.mGate = mGate;
         this.mDelay = mdelay;
     }
+
+
     public Flight(Long id,String departure_airport, String arrival_airport, String status, String mFlightNumber, String mTerminal, String mGate, String mdelay) {
         this.flight_id=id;
         this.departure_airport = departure_airport;
@@ -39,9 +45,11 @@ public class Flight implements Parcelable {
         this.mDelay = mdelay;
     }
 
+
     public Flight() {
 
     }
+
 
     protected Flight(Parcel in) {
         mFlightNumber = in.readString();
@@ -57,6 +65,7 @@ public class Flight implements Parcelable {
             flight_id = in.readLong();
         }
     }
+
 
     public static final Creator<Flight> CREATOR = new Creator<Flight>() {
         @Override
@@ -74,6 +83,7 @@ public class Flight implements Parcelable {
     public Long getFlight_id() {
         return flight_id;
     }
+
 
     public Flight convertJsonToFlight(JSONObject jsonObject) throws JSONException {
             JSONObject flight_detail = jsonObject.getJSONObject(API_KEYS.FLIGHT);
@@ -94,17 +104,21 @@ public class Flight implements Parcelable {
             return flight;
     }
 
+
     public String getDeparture_airport() {
         return departure_airport;
     }
+
 
     public String getArrival_airport() {
         return arrival_airport;
     }
 
+
     public String getStatus() {
         return status;
     }
+
 
     public String getmFlightNumber() {
         if(mFlightNumber==null || mFlightNumber.isEmpty() || mFlightNumber=="null")
@@ -115,13 +129,16 @@ public class Flight implements Parcelable {
     }
 
 
+
     public String getmTerminal() {
         return mTerminal;
     }
 
+
     public String getmGate() {
         return mGate;
     }
+
 
     public String getmDelay() {
         return mDelay;

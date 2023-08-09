@@ -12,10 +12,10 @@
     <string name="trivia_question">Trivia Question</string>
     <string name="bear_image">Bear Image</string>
     <string name="help">Help</string>
-    <string name="favourite">Favourite</string>
+    <string name="favourite">Favorite</string>
     <string name="home">Home</string>
-    <string name="main_help_title">Search Airport by It\'s code Name</string>
-    <string name="main_help_message">Instruction to use</string>
+    <string name="main_help_title">Search Airport by IATA code</string>
+    <string name="main_help_message">Type the IATA airport code to get a list of flights</string>
     <string name="main_positive_button_label">Ok</string>
     <string name="main_negative_button_label">Cancel\n</string>
     <string name="hint_airport_code_input">Airport code is require</string>
@@ -29,9 +29,9 @@
     <string name="gate">Gate:</string>
     <string name="delay">Delay:</string>
     <string name="departure_airport">Departure Airport</string>
-    <string name="save_to_favourite">Save to favourite</string>
-    <string name="add_into_favourite" >Add into favourite successfully</string>
-    <string name="no_record_found">Sorry! No Record in Favourite</string>
+    <string name="save_to_favourite">Save to favorite</string>
+    <string name="add_into_favourite" >Add into favorite successfully</string>
+    <string name="no_record_found">Sorry! No Record in Favorite</string>
     <string name="api_server_error">Error occurred while fetching data: </string>
     <string name="do_you_want_delete_record">"Do you want to delete the record on "</string>
     <string name="please_confirm">Please Confirm\n</string>

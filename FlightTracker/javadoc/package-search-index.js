@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.flighttracker"},{"l":"com.example.flighttracker.database"},{"l":"com.example.flighttracker.databinding"},{"l":"com.example.flighttracker.entry"}];updateSearchResults();
