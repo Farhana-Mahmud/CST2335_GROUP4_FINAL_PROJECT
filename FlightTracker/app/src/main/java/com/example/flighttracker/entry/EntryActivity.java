@@ -58,7 +58,7 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
         {
             Intent intent = new Intent(EntryActivity.this, MainActivity.class);
             startActivity(intent);
-        } else if (view.getId()==R.id.btn_trivia_quiz) {
+        } else if (view.getId()==R.id.btn_currency_converter) {
             Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
             startActivity(intent);
         }
