@@ -9,6 +9,12 @@
         android:visible="true"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menu_trivia"
+        android:icon="@drawable/triv"
+        android:title="@string/trivia_question"
+        android:visible="true"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/menu_help"
         android:icon="@drawable/baseline_help_24"
         app:showAsAction="always"

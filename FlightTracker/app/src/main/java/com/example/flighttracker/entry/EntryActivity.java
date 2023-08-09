@@ -15,6 +15,9 @@ import com.example.flighttracker.MainActivity;
 import com.example.flighttracker.R;
 import com.example.flighttracker.databinding.ActivityEntryBinding;
 
+import TriviaDatabase.Start;
+import TriviaDatabase.TriviaQuestion;
+
 public class EntryActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityEntryBinding activityEntryBinding;
@@ -45,6 +48,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EntryActivity.this, MainActivity.class);
             startActivity(intent);
         }
+        else if (item.getItemId()==R.id.menu_trivia)
+        {
+            Intent intent = new Intent(EntryActivity.this, Start.class);
+            startActivity(intent);
+        }
          return true;
     }
 
@@ -54,9 +62,10 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
         {
             Intent intent = new Intent(EntryActivity.this, MainActivity.class);
             startActivity(intent);
+        } else if (view.getId()==R.id.btn_trivia_quiz) {
+            Intent intent = new Intent(EntryActivity.this, Start.class);
+            startActivity(intent);
         }
-
-
 
 
     }

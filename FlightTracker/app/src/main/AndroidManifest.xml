@@ -10,7 +10,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Final Project"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FlightTracker"
@@ -30,6 +30,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Add the activity for the Start activity -->
+        <activity
+            android:name="TriviaDatabase.Start"
+            android:exported="true" />
+
+        <!-- Add the activity for MainActivity2 -->
+        <activity
+            android:name="TriviaDatabase.MainActivity2"
+            android:exported="true" />
+
+        <!-- Add the activity for SecondActivity -->
+        <activity
+            android:name="TriviaDatabase.SecondActivity"
+            android:exported="true" />
+        <activity
+            android:name="TriviaDatabase.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name="TriviaDatabase.NameEntryActivity"
+            android:exported="true" />
+        <activity
+            android:name="TriviaDatabase.HighScoreActivity"
+            android:exported="true" />
+        <activity
+            android:name="TriviaDatabase.HighScorerNameFragment"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>
