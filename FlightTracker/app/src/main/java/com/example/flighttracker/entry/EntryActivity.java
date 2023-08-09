@@ -10,14 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.flighttracker.FlightDetail;
+
 import com.example.flighttracker.MainActivity;
 import com.example.flighttracker.R;
 import com.example.flighttracker.databinding.ActivityEntryBinding;
 
 import TriviaDatabase.Start;
-import TriviaDatabase.TriviaQuestion;
+import CurrencyConverter.CurrencyConverter;
 
+/**
+ * This class shows four buttons that links to four different apps as well as icons
+ * @author afnan farhana Avneet Riya
+ *
+ */
 public class EntryActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityEntryBinding activityEntryBinding;
@@ -30,6 +35,12 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return each activity that is linked with the icons
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_entry,menu);
@@ -53,9 +64,18 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EntryActivity.this, Start.class);
             startActivity(intent);
         }
-         return true;
+        else if (item.getItemId()==R.id.menu_converter) {
+            Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
+            startActivity(intent);
+        }
+
+        return true;
     }
 
+    /**
+     *
+     * @param view The view that was clicked.
+     */
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.btn_flight_tracker)
@@ -66,6 +86,11 @@ public class EntryActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EntryActivity.this, Start.class);
             startActivity(intent);
         }
+        else if(view.getId()==R.id.btn_currency_converter)
+        {
+            Intent intent = new Intent(EntryActivity.this, CurrencyConverter.class);
+            startActivity(intent);
+     }
 
 
     }

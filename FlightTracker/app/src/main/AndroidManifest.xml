@@ -58,6 +58,11 @@
             android:name="TriviaDatabase.HighScorerNameFragment"
             android:exported="false"
             tools:ignore="Instantiatable" />
+        <activity
+            android:name="CurrencyConverter.CurrencyConverter"
+            android:label="Currency Converter">
+            </activity>
+
     </application>
 
 </manifest>

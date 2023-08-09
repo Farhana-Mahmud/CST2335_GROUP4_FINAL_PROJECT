@@ -6,4 +6,6 @@
     <color name="backg">#6a5be2</color>
     <color name="category">#e8e4fa</color>
     <color name="click">#ff8fa3</color>
+    <color name="pink">#E91E63</color>
+    <color name="background_color">#EFD1DB</color>
 </resources>
