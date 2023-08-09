@@ -98,7 +98,8 @@ public class CurrencyConverter extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         binding = ActivityChatRoom1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //setSupportActionBar(binding.myToolbar);
+
+        setSupportActionBar(binding.myToolbar);
         chatModel = new ViewModelProvider(this).get(ConversionRoomViewModel.class);
         ////message = chatModel.messages.getValue();
         binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
