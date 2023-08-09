@@ -79,9 +79,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
 
 
+
         /**
          *
-          * @param itemView shows item
+         * @param itemView shows item
          */
         QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
